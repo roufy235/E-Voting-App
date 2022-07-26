@@ -48,7 +48,7 @@ class LoginScreen extends StatelessWidget {
                 SizedBox(height: 30.h),
                 Container(
                   decoration: BoxDecoration(
-                      color: Theme.of(context).focusColor,
+                      color: Theme.of(context).colorScheme.primaryContainer,
                     borderRadius: BorderRadius.circular(20)
                   ),
                   child: const TextField(
@@ -63,7 +63,7 @@ class LoginScreen extends StatelessWidget {
                 SizedBox(height: 30.h),
                 Container(
                   decoration: BoxDecoration(
-                      color: Theme.of(context).focusColor,
+                      color: Theme.of(context).colorScheme.primaryContainer,
                       borderRadius: BorderRadius.circular(20)
                   ),
                   child: const TextField(

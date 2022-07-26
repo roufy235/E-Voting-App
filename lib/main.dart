@@ -61,8 +61,8 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             elevatedButtonTheme: ElevatedButtonThemeData(
                 style: ElevatedButton.styleFrom(
-                  primary: brandColor,
-                  onPrimary: colorWhite,
+                  primary: lightColorScheme.primary,
+                  onPrimary: lightColorScheme.onPrimary,
                 )
             ),
             useMaterial3: true,
