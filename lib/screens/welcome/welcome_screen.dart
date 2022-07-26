@@ -1,14 +1,17 @@
-import 'package:e_voting_app/utils/colors.dart';
+import 'package:e_voting_app/screens/login/login_screen.dart';
 import 'package:e_voting_app/utils/dimens.dart';
 import 'package:e_voting_app/widgets/btn_elevated.dart';
 import 'package:e_voting_app/widgets/btn_outlined.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
+
+  static const String routeName = '/';
 
   @override
   Widget build(BuildContext context) {
@@ -17,24 +20,22 @@ class WelcomeScreen extends StatelessWidget {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.symmetric(
-                horizontal: 20.w
-            ),
+            padding: EdgeInsets.symmetric(horizontal: 15.w),
             child: Column(
               children: [
-                SizedBox(height: 40.h),
+                SizedBox(height: 30.h),
                 Center(
                   child: Text(appName, style:
                     GoogleFonts.poppins(
-                      fontSize: 25.sp,
+                      fontSize: defaultBigFontSize.sp,
                       fontWeight: FontWeight.bold
                     )
                   ),
                 ),
                 SizedBox(height: 40.h),
                 SvgPicture.asset('assets/svg/voting.svg',
-                  width: 170.w,
-                  height: 170.w,
+                  width: 160.w,
+                  height: 160.w,
                 ),
                 SizedBox(height: 40.h),
                 Text(
@@ -51,15 +52,17 @@ class WelcomeScreen extends StatelessWidget {
       ),
       bottomNavigationBar: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: 20.w
+          padding: EdgeInsets.only(
+            right: 20.w,
+            bottom: 20.h,
+            left: 20.w
           ),
           child: Row(
             children: [
               Expanded(
                 child: BtnOutlined(
                   child: const Text('Sign In'),
-                  onPressed: () {},
+                  onPressed: () => context.go('/$routeName/${LoginScreen.routeName}'),
                 ),
               ),
               SizedBox(width: 10.w),

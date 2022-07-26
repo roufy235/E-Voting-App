@@ -1,4 +1,5 @@
 import 'package:dynamic_color/dynamic_color.dart';
+import 'package:e_voting_app/screens/login/login_screen.dart';
 import 'package:e_voting_app/screens/welcome/welcome_screen.dart';
 import 'package:e_voting_app/utils/colors.dart';
 import 'package:flutter/material.dart';
@@ -17,13 +18,19 @@ class MyApp extends StatelessWidget {
 
 
   final GoRouter _router = GoRouter(
-    initialLocation: '/',
+    initialLocation: WelcomeScreen.routeName,
     routes: [
       GoRoute(
-        path: '/',
+        path: WelcomeScreen.routeName,
         builder: (BuildContext context, GoRouterState state) {
           return const WelcomeScreen();
-        }
+        },
+        routes: [
+          GoRoute(
+            path: LoginScreen.routeName,
+            builder: (BuildContext context, GoRouterState state) => const LoginScreen()
+          )
+        ]
       ),
     ]
   );
@@ -45,13 +52,19 @@ class MyApp extends StatelessWidget {
           darkColorScheme = ColorScheme.fromSeed(seedColor: brandColor, brightness: Brightness.dark);
         }
 
-        //lightColorScheme = ColorScheme.fromSeed(seedColor: brandColor);
-        //darkColorScheme = ColorScheme.fromSeed(seedColor: brandColor, brightness: Brightness.dark);
+        lightColorScheme = ColorScheme.fromSeed(seedColor: brandColor);
+        darkColorScheme = ColorScheme.fromSeed(seedColor: brandColor, brightness: Brightness.dark);
 
         return MaterialApp.router(
           debugShowCheckedModeBanner: false,
           title: 'Flutter Demo',
           theme: ThemeData(
+            elevatedButtonTheme: ElevatedButtonThemeData(
+                style: ElevatedButton.styleFrom(
+                  primary: brandColor,
+                  onPrimary: colorWhite,
+                )
+            ),
             useMaterial3: true,
             colorScheme: lightColorScheme,
             textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme),
