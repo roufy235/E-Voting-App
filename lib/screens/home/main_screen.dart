@@ -1,17 +1,48 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-
 final StateProvider bottomNavigationCurrentIndexProvider = StateProvider<int>((ref) => 0);
 
-class MainScreen extends ConsumerWidget {
+class MainScreen extends ConsumerStatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
 
   static const String routeName = 'home';
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<MainScreen> createState() => _MainScreenState();
+}
+
+class _MainScreenState extends ConsumerState<MainScreen> {
+  final PageController _pageController = PageController(initialPage: 0);
+
+  @override
+  void dispose() {
+    super.dispose();
+    _pageController.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    ref.listen<dynamic>(bottomNavigationCurrentIndexProvider, (previous, next) {
+      _pageController.jumpToPage(next);
+    });
+
     return Scaffold(
+      body: SizedBox.expand(
+        child: PageView(
+          physics: const NeverScrollableScrollPhysics(),
+          onPageChanged: (int index) {
+            ref.read(bottomNavigationCurrentIndexProvider.state).state = index;
+          },
+          controller: _pageController,
+          children: const [
+            Center(child: Text('Home')),
+            Center(child: Text('Vote')),
+            Center(child: Text('Stats')),
+            Center(child: Text('Settings')),
+          ],
+        ),
+      ),
       bottomNavigationBar: NavigationBarTheme(
         data: NavigationBarThemeData(
           //indicatorColor: Colors.blue.shade200,
@@ -21,6 +52,7 @@ class MainScreen extends ConsumerWidget {
           ),
         ),
         child: NavigationBar(
+          height: 70,
           selectedIndex: ref.watch(bottomNavigationCurrentIndexProvider.state).state,
           //animationDuration: const Duration(seconds: 1),
           elevation: 10.0,
