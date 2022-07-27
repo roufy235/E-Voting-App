@@ -1,3 +1,4 @@
+import 'package:e_voting_app/screens/home/tabs/home_tab.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -36,7 +37,7 @@ class _MainScreenState extends ConsumerState<MainScreen> {
           },
           controller: _pageController,
           children: const [
-            Center(child: Text('Home')),
+            HomeTab(),
             Center(child: Text('Vote')),
             Center(child: Text('Stats')),
             Center(child: Text('Settings')),
