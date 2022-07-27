@@ -1,11 +1,12 @@
-import 'package:e_voting_app/utils/colors.dart';
+import 'package:e_voting_app/screens/reg/init_reg_screen.dart';
+import 'package:e_voting_app/screens/welcome/welcome_screen.dart';
 import 'package:e_voting_app/utils/dimens.dart';
 import 'package:e_voting_app/widgets/btn_elevated.dart';
+import 'package:e_voting_app/widgets/input_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hive/hive.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -32,13 +33,13 @@ class LoginScreen extends StatelessWidget {
                 ),
                 SizedBox(height: 20.h),
                 Text('Welcome',
-                  style: GoogleFonts.poppins(
+                  style: GoogleFonts.mulish(
                     fontWeight: FontWeight.bold,
                     fontSize: defaultSemiBigFontSize.sp
                   ),
                 ),
                 Text('Back!',
-                  style: GoogleFonts.poppins(
+                  style: GoogleFonts.mulish(
                       fontWeight: FontWeight.bold,
                       fontSize: defaultSemiBigFontSize.sp
                   ),
@@ -46,12 +47,8 @@ class LoginScreen extends StatelessWidget {
                 SizedBox(height: 5.h),
                 const Text('Sign in to your account.'),
                 SizedBox(height: 30.h),
-                Container(
-                  decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.primaryContainer,
-                    borderRadius: BorderRadius.circular(20)
-                  ),
-                  child: const TextField(
+                const InputStyle(
+                  child: TextField(
                     keyboardType: TextInputType.emailAddress,
                     decoration: InputDecoration(
                       labelText: 'Enter your email address',
@@ -61,12 +58,8 @@ class LoginScreen extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 30.h),
-                Container(
-                  decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.primaryContainer,
-                      borderRadius: BorderRadius.circular(20)
-                  ),
-                  child: const TextField(
+                const InputStyle(
+                  child: TextField(
                     obscureText: true,
                     keyboardType: TextInputType.text,
                     decoration: InputDecoration(
@@ -80,7 +73,21 @@ class LoginScreen extends StatelessWidget {
                 BtnElevated(
                     child: const Text('Sign In'),
                     onPressed: () {}
-                )
+                ),
+                SizedBox(height: 30.h),
+                const Text("Don't have an account?"),
+                SizedBox(height: 7.h),
+                InkWell(
+                  onTap: () {
+                    context.go('/${WelcomeScreen.routeName}/${InitRegScreen.routeName}');
+                  },
+                  child: Text("Sign Up",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).colorScheme.primary
+                    ),
+                  ),
+                ),
               ],
             ),
           ),

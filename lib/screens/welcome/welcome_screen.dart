@@ -1,4 +1,5 @@
 import 'package:e_voting_app/screens/login/login_screen.dart';
+import 'package:e_voting_app/screens/reg/init_reg_screen.dart';
 import 'package:e_voting_app/utils/dimens.dart';
 import 'package:e_voting_app/widgets/btn_elevated.dart';
 import 'package:e_voting_app/widgets/btn_outlined.dart';
@@ -26,7 +27,7 @@ class WelcomeScreen extends StatelessWidget {
                 SizedBox(height: 30.h),
                 Center(
                   child: Text(appName, style:
-                    GoogleFonts.poppins(
+                    GoogleFonts.mulish(
                       fontSize: defaultBigFontSize.sp,
                       fontWeight: FontWeight.bold
                     )
@@ -69,7 +70,7 @@ class WelcomeScreen extends StatelessWidget {
               Expanded(
                 child: BtnElevated(
                   child: const Text('Get Started'),
-                  onPressed: () {},
+                  onPressed: () => context.go('/$routeName/${InitRegScreen.routeName}'),
                 ),
               )
             ],

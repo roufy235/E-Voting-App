@@ -1,5 +1,7 @@
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:e_voting_app/screens/login/login_screen.dart';
+import 'package:e_voting_app/screens/reg/init_reg_screen.dart';
+import 'package:e_voting_app/screens/reg/reg_screen.dart';
 import 'package:e_voting_app/screens/welcome/welcome_screen.dart';
 import 'package:e_voting_app/utils/colors.dart';
 import 'package:flutter/material.dart';
@@ -29,6 +31,16 @@ class MyApp extends StatelessWidget {
           GoRoute(
             path: LoginScreen.routeName,
             builder: (BuildContext context, GoRouterState state) => const LoginScreen()
+          ),
+          GoRoute(
+              path: InitRegScreen.routeName,
+              builder: (BuildContext context, GoRouterState state) => const InitRegScreen(),
+            routes: [
+              GoRoute(
+                  path: RegScreen.routeName,
+                  builder: (BuildContext context, GoRouterState state) => const RegScreen()
+              )
+            ]
           )
         ]
       ),
@@ -67,12 +79,12 @@ class MyApp extends StatelessWidget {
             ),
             useMaterial3: true,
             colorScheme: lightColorScheme,
-            textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme),
+            textTheme: GoogleFonts.mulishTextTheme(Theme.of(context).textTheme),
           ),
           darkTheme: ThemeData(
             useMaterial3: true,
             colorScheme: darkColorScheme,
-            textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).primaryTextTheme),
+            textTheme: GoogleFonts.mulishTextTheme(Theme.of(context).primaryTextTheme),
           ),
           routeInformationProvider: _router.routeInformationProvider,
           routeInformationParser: _router.routeInformationParser,
