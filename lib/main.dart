@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
         routes: [
           GoRoute(
             path: LoginScreen.routeName,
-            builder: (BuildContext context, GoRouterState state) => const LoginScreen()
+            builder: (BuildContext context, GoRouterState state) => LoginScreen()
           ),
           GoRoute(
               path: InitRegScreen.routeName,

@@ -5,14 +5,17 @@ import 'package:e_voting_app/utils/dimens.dart';
 import 'package:e_voting_app/widgets/btn_elevated.dart';
 import 'package:e_voting_app/widgets/input_style.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+  LoginScreen({Key? key}) : super(key: key);
 
   static const String routeName = 'login';
+
+  final StateProvider isLoadingProvider = StateProvider((ref) => 0);
 
   @override
   Widget build(BuildContext context) {
@@ -71,11 +74,21 @@ class LoginScreen extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 40.h),
-                BtnElevated(
-                    child: const Text('Sign In'),
-                    onPressed: () {
-                      context.go('/${MainScreen.routeName}');
-                    }
+                Consumer(
+                  builder: (context, ref, child) {
+                    int isLoading = ref.watch(isLoadingProvider.state).state;
+                    return BtnElevated(
+                        isLoading: isLoading == 1 ? true : false,
+                        child: const Text('Sign In'),
+                        onPressed: () {
+                          ref.read(isLoadingProvider.notifier).state = 1;
+                          Future.delayed(const Duration(seconds: 3), () {
+                            ref.read(isLoadingProvider.notifier).state = 0;
+                            context.go('/${MainScreen.routeName}');
+                          });
+                        }
+                    );
+                  }
                 ),
                 SizedBox(height: 30.h),
                 const Text("Don't have an account?"),
