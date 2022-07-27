@@ -1,7 +1,9 @@
+import 'package:e_voting_app/screens/home/main_screen.dart';
 import 'package:e_voting_app/widgets/btn_elevated.dart';
 import 'package:e_voting_app/widgets/input_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
 class RegScreen extends StatelessWidget {
   const RegScreen({Key? key}) : super(key: key);
@@ -86,7 +88,9 @@ class RegScreen extends StatelessWidget {
               SizedBox(height: 30.h),
               BtnElevated(
                   child: const Text('Continue'),
-                  onPressed: () {}
+                  onPressed: () {
+                    context.go('/${MainScreen.routeName}');
+                  }
               )
             ],
           ),

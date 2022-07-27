@@ -1,3 +1,4 @@
+import 'package:e_voting_app/screens/home/main_screen.dart';
 import 'package:e_voting_app/screens/reg/init_reg_screen.dart';
 import 'package:e_voting_app/screens/welcome/welcome_screen.dart';
 import 'package:e_voting_app/utils/dimens.dart';
@@ -72,7 +73,9 @@ class LoginScreen extends StatelessWidget {
                 SizedBox(height: 40.h),
                 BtnElevated(
                     child: const Text('Sign In'),
-                    onPressed: () {}
+                    onPressed: () {
+                      context.go('/${MainScreen.routeName}');
+                    }
                 ),
                 SizedBox(height: 30.h),
                 const Text("Don't have an account?"),

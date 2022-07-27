@@ -1,4 +1,5 @@
 import 'package:dynamic_color/dynamic_color.dart';
+import 'package:e_voting_app/screens/home/main_screen.dart';
 import 'package:e_voting_app/screens/login/login_screen.dart';
 import 'package:e_voting_app/screens/reg/init_reg_screen.dart';
 import 'package:e_voting_app/screens/reg/reg_screen.dart';
@@ -22,6 +23,10 @@ class MyApp extends StatelessWidget {
   final GoRouter _router = GoRouter(
     initialLocation: WelcomeScreen.routeName,
     routes: [
+      GoRoute(
+          path: '/${MainScreen.routeName}',
+          builder: (BuildContext context, GoRouterState state) => const MainScreen()
+      ),
       GoRoute(
         path: WelcomeScreen.routeName,
         builder: (BuildContext context, GoRouterState state) {
@@ -47,7 +52,6 @@ class MyApp extends StatelessWidget {
     ]
   );
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return DynamicColorBuilder(
