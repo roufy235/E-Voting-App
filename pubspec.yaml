@@ -47,6 +47,12 @@ dependencies:
   hive: ^2.2.3
   hive_flutter: ^1.1.0
   loading_animation_widget: ^1.2.0+2
+  firebase_core: ^1.20.0
+  firebase_auth: ^3.6.0
+  firebase_analytics: ^9.3.0
+  firebase_crashlytics: ^2.8.6
+  firebase_performance: ^0.8.2+1
+  cloud_firestore: ^3.4.1
 
 dev_dependencies:
   flutter_test:

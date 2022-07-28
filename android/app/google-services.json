@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "1019358207969",
+    "project_id": "evoting-flutter",
+    "storage_bucket": "evoting-flutter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1019358207969:android:d3c1c70c07cf5bbe9bbca0",
+        "android_client_info": {
+          "package_name": "com.voting.e_voting_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1019358207969-k45lkgsteafji1715m0qmrg769had48c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAkZysSjqAk9uLoi9BL1dvcgDC9_YWPZio"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1019358207969-k45lkgsteafji1715m0qmrg769had48c.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1019358207969-1ehnvle68t1hf832rld319pidie94odo.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.voting.eVotingApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
