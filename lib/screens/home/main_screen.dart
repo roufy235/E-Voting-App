@@ -7,7 +7,6 @@ final StateProvider bottomNavigationCurrentIndexProvider = StateProvider<int>((r
 class MainScreen extends ConsumerStatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
 
-  static const String routeName = 'home';
 
   @override
   ConsumerState<MainScreen> createState() => _MainScreenState();

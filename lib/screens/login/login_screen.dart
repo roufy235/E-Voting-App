@@ -1,6 +1,5 @@
-import 'package:e_voting_app/screens/home/main_screen.dart';
-import 'package:e_voting_app/screens/reg/init_reg_screen.dart';
-import 'package:e_voting_app/screens/welcome/welcome_screen.dart';
+import 'package:e_voting_app/router/app_screens.dart';
+import 'package:e_voting_app/router/app_screens_ext.dart';
 import 'package:e_voting_app/utils/dimens.dart';
 import 'package:e_voting_app/widgets/btn_elevated.dart';
 import 'package:e_voting_app/widgets/input_style.dart';
@@ -13,7 +12,6 @@ import 'package:google_fonts/google_fonts.dart';
 class LoginScreen extends StatelessWidget {
   LoginScreen({Key? key}) : super(key: key);
 
-  static const String routeName = 'login';
 
   final StateProvider isLoadingProvider = StateProvider((ref) => 0);
 
@@ -84,7 +82,7 @@ class LoginScreen extends StatelessWidget {
                           ref.read(isLoadingProvider.notifier).state = 1;
                           Future.delayed(const Duration(seconds: 3), () {
                             ref.read(isLoadingProvider.notifier).state = 0;
-                            context.go('/${MainScreen.routeName}');
+                            context.go('/${AppScreens.home.toPath}');
                           });
                         }
                     );
@@ -95,7 +93,7 @@ class LoginScreen extends StatelessWidget {
                 SizedBox(height: 7.h),
                 InkWell(
                   onTap: () {
-                    context.go('/${WelcomeScreen.routeName}/${InitRegScreen.routeName}');
+                    context.go('/${AppScreens.welcome.toPath}/${AppScreens.initReg.toPath}');
                   },
                   child: Text("Sign Up",
                     style: TextStyle(

@@ -1,6 +1,6 @@
 import 'package:e_voting_app/resource/firestore_methods.dart';
-import 'package:e_voting_app/screens/reg/reg_screen.dart';
-import 'package:e_voting_app/screens/welcome/welcome_screen.dart';
+import 'package:e_voting_app/router/app_screens.dart';
+import 'package:e_voting_app/router/app_screens_ext.dart';
 import 'package:e_voting_app/widgets/btn_elevated.dart';
 import 'package:e_voting_app/widgets/input_style.dart';
 import 'package:flutter/material.dart';
@@ -11,8 +11,6 @@ import 'package:go_router/go_router.dart';
 
 class InitRegScreen extends StatefulWidget {
   const InitRegScreen({Key? key}) : super(key: key);
-
-  static const String routeName = 'initReg';
 
   @override
   State<InitRegScreen> createState() => _InitRegScreenState();
@@ -91,7 +89,7 @@ class _InitRegScreenState extends State<InitRegScreen> {
                           ref.read(_isLoadingProvider.notifier).state = 0;
                           if (responseBool) {
                             if(!mounted) return;
-                            context.go('/${WelcomeScreen.routeName}/${InitRegScreen.routeName}/${RegScreen.routeName}');
+                            context.go('/${AppScreens.welcome.toPath}/${AppScreens.initReg.toPath}/${AppScreens.reg.toPath}');
                           } else {
                             showDialog(
                                 context: context,

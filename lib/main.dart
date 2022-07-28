@@ -1,10 +1,6 @@
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:e_voting_app/firebase_options.dart';
-import 'package:e_voting_app/screens/home/main_screen.dart';
-import 'package:e_voting_app/screens/login/login_screen.dart';
-import 'package:e_voting_app/screens/reg/init_reg_screen.dart';
-import 'package:e_voting_app/screens/reg/reg_screen.dart';
-import 'package:e_voting_app/screens/welcome/welcome_screen.dart';
+import 'package:e_voting_app/router/app_router.dart';
 import 'package:e_voting_app/utils/colors.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -31,38 +27,7 @@ class MyApp extends StatelessWidget {
   final FirebaseAnalyticsObserver observer = FirebaseAnalyticsObserver(analytics: analytics);
   final FirebasePerformance _firebasePerformance = FirebasePerformance.instance;
 
-
-  final GoRouter _router = GoRouter(
-    initialLocation: WelcomeScreen.routeName,
-    routes: [
-      GoRoute(
-          path: '/${MainScreen.routeName}',
-          builder: (BuildContext context, GoRouterState state) => const MainScreen()
-      ),
-      GoRoute(
-        path: WelcomeScreen.routeName,
-        builder: (BuildContext context, GoRouterState state) {
-          return const WelcomeScreen();
-        },
-        routes: [
-          GoRoute(
-            path: LoginScreen.routeName,
-            builder: (BuildContext context, GoRouterState state) => LoginScreen()
-          ),
-          GoRoute(
-              path: InitRegScreen.routeName,
-              builder: (BuildContext context, GoRouterState state) => const InitRegScreen(),
-            routes: [
-              GoRoute(
-                  path: RegScreen.routeName,
-                  builder: (BuildContext context, GoRouterState state) => const RegScreen()
-              )
-            ]
-          )
-        ]
-      ),
-    ]
-  );
+  final GoRouter _router = AppRouter().router;
 
   @override
   Widget build(BuildContext context) {

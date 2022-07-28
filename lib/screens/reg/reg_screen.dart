@@ -1,5 +1,6 @@
 import 'package:e_voting_app/resource/auth_methods.dart';
-import 'package:e_voting_app/screens/home/main_screen.dart';
+import 'package:e_voting_app/router/app_screens.dart';
+import 'package:e_voting_app/router/app_screens_ext.dart';
 import 'package:e_voting_app/widgets/btn_elevated.dart';
 import 'package:e_voting_app/widgets/input_style.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +12,6 @@ import 'package:go_router/go_router.dart';
 class RegScreen extends StatefulWidget {
   const RegScreen({Key? key}) : super(key: key);
 
-  static const String routeName = 'reg';
 
   @override
   State<RegScreen> createState() => _RegScreenState();
@@ -219,7 +219,7 @@ class _RegScreenState extends State<RegScreen> {
                   child: const Text("OK"),
                   onPressed: () {
                     Navigator.of(ctx).pop();
-                    Future.delayed(const Duration(seconds: 1), () => context.go('/${MainScreen.routeName}'));
+                    Future.delayed(const Duration(seconds: 1), () => context.go('/${AppScreens.home.toPath}'));
                   },
                 )
               ],

@@ -1,5 +1,5 @@
-import 'package:e_voting_app/screens/login/login_screen.dart';
-import 'package:e_voting_app/screens/reg/init_reg_screen.dart';
+import 'package:e_voting_app/router/app_screens.dart';
+import 'package:e_voting_app/router/app_screens_ext.dart';
 import 'package:e_voting_app/utils/dimens.dart';
 import 'package:e_voting_app/widgets/btn_elevated.dart';
 import 'package:e_voting_app/widgets/btn_outlined.dart';
@@ -11,8 +11,6 @@ import 'package:google_fonts/google_fonts.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
-
-  static const String routeName = '/';
 
   @override
   Widget build(BuildContext context) {
@@ -63,14 +61,14 @@ class WelcomeScreen extends StatelessWidget {
               Expanded(
                 child: BtnOutlined(
                   child: const Text('Sign In'),
-                  onPressed: () => context.go('/$routeName/${LoginScreen.routeName}'),
+                  onPressed: () => context.go('/${AppScreens.welcome.toPath}/${AppScreens.login.toPath}'),
                 ),
               ),
               SizedBox(width: 10.w),
               Expanded(
                 child: BtnElevated(
                   child: const Text('Get Started'),
-                  onPressed: () => context.go('/$routeName/${InitRegScreen.routeName}'),
+                  onPressed: () => context.go('/${AppScreens.welcome.toPath}/${AppScreens.initReg.toPath}'),
                 ),
               )
             ],
