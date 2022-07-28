@@ -1,3 +1,5 @@
+import 'package:e_voting_app/resource/auth_methods.dart';
+import 'package:e_voting_app/widgets/btn_elevated.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -65,6 +67,13 @@ class HomeTab extends StatelessWidget {
                 ],
               ),
             ),
+            SizedBox(height: 20.h),
+            BtnElevated(
+                child: Text('logout'),
+                onPressed: () async {
+                  AuthMethods().logout();
+                }
+            )
 
           ],
         ),

@@ -3,7 +3,7 @@ import 'package:e_voting_app/router/app_screens.dart';
 extension AppScreensExtension on AppScreens {
   String get toPath {
     switch(this) {
-      case AppScreens.welcome: return '/';
+      case AppScreens.welcome: return 'welcome';
       case AppScreens.home: return 'home';
       case AppScreens.initReg: return 'initReg';
       case AppScreens.login: return 'login';

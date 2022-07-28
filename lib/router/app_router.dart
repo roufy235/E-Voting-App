@@ -11,11 +11,10 @@ import 'package:go_router/go_router.dart';
 
 class AppRouter {
   GoRouter get router => _goRouter;
-  User? currentUser = FirebaseAuth.instance.currentUser;
-  bool isLogin = false;
 
   late final GoRouter _goRouter = GoRouter(
-    initialLocation: AppScreens.welcome.toPath,
+    initialLocation: '/${AppScreens.welcome.toPath}',
+    refreshListenable: GoRouterRefreshStream(FirebaseAuth.instance.authStateChanges()),
     routes: <GoRoute> [
       GoRoute(
           path: '/${AppScreens.home.toPath}',
@@ -23,7 +22,7 @@ class AppRouter {
           builder: (BuildContext context, GoRouterState state) => const MainScreen()
       ),
       GoRoute(
-          path: AppScreens.welcome.toPath,
+          path: '/${AppScreens.welcome.toPath}',
           name: AppScreens.welcome.toName,
           builder: (BuildContext context, GoRouterState state) {
             return const WelcomeScreen();
@@ -32,7 +31,7 @@ class AppRouter {
             GoRoute(
                 path: AppScreens.login.toPath,
                 name: AppScreens.login.toName,
-                builder: (BuildContext context, GoRouterState state) => LoginScreen()
+                builder: (BuildContext context, GoRouterState state) => const LoginScreen()
             ),
             GoRoute(
                 path: AppScreens.initReg.toPath,
@@ -49,5 +48,30 @@ class AppRouter {
           ]
       ),
     ],
+    redirect: (GoRouterState state) {
+      final loginLocation = state.namedLocation(AppScreens.login.toPath);
+      final isGoingLoginLocation = state.subloc == loginLocation.replaceAll('?', '');
+
+      final homeLocation = state.namedLocation(AppScreens.home.toPath);
+      final isGoingHomeLocation = state.subloc == homeLocation.replaceAll('?', '');
+
+      final welcomeLocation = state.namedLocation(AppScreens.welcome.toPath);
+      final isGoingWelcomeLocation = state.subloc == welcomeLocation.replaceAll('?', '');
+      User? currentUser = FirebaseAuth.instance.currentUser;
+      bool isLoggedIn = currentUser != null;
+
+      if (isLoggedIn && isGoingWelcomeLocation) {
+        return homeLocation;
+      }
+
+      if (!isLoggedIn && isGoingHomeLocation) {
+        return welcomeLocation;
+      }
+
+      if (isLoggedIn && isGoingLoginLocation) {
+        return homeLocation;
+      }
+      return null;
+    }
   );
 }

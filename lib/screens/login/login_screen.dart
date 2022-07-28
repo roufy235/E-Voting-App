@@ -1,3 +1,4 @@
+import 'package:e_voting_app/resource/auth_methods.dart';
 import 'package:e_voting_app/router/app_screens.dart';
 import 'package:e_voting_app/router/app_screens_ext.dart';
 import 'package:e_voting_app/utils/dimens.dart';
@@ -9,11 +10,25 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class LoginScreen extends StatelessWidget {
-  LoginScreen({Key? key}) : super(key: key);
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({Key? key}) : super(key: key);
 
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
 
+class _LoginScreenState extends State<LoginScreen> {
   final StateProvider isLoadingProvider = StateProvider((ref) => 0);
+
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    super.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,10 +64,11 @@ class LoginScreen extends StatelessWidget {
                 SizedBox(height: 5.h),
                 const Text('Sign in to your account.'),
                 SizedBox(height: 30.h),
-                const InputStyle(
+                InputStyle(
                   child: TextField(
+                    controller: _emailController,
                     keyboardType: TextInputType.emailAddress,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       labelText: 'Enter your email address',
                       border: InputBorder.none,
                       prefixIcon: Icon(Icons.email)
@@ -60,11 +76,12 @@ class LoginScreen extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 30.h),
-                const InputStyle(
+                InputStyle(
                   child: TextField(
+                    controller: _passwordController,
                     obscureText: true,
                     keyboardType: TextInputType.text,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                         labelText: 'Enter your password',
                         border: InputBorder.none,
                         prefixIcon: Icon(Icons.email)
@@ -78,12 +95,16 @@ class LoginScreen extends StatelessWidget {
                     return BtnElevated(
                         isLoading: isLoading == 1 ? true : false,
                         child: const Text('Sign In'),
-                        onPressed: () {
+                        onPressed: () async {
                           ref.read(isLoadingProvider.notifier).state = 1;
-                          Future.delayed(const Duration(seconds: 3), () {
-                            ref.read(isLoadingProvider.notifier).state = 0;
-                            context.go('/${AppScreens.home.toPath}');
-                          });
+                          String email = _emailController.text;
+                          String password = _passwordController.text;
+                          await AuthMethods().signInUser(email: email, password: password);
+                          ref.read(isLoadingProvider.notifier).state = 0;
+                          // Future.delayed(const Duration(seconds: 3), () {
+                          //   ref.read(isLoadingProvider.notifier).state = 0;
+                          //   context.go('/${AppScreens.home.toPath}');
+                          // });
                         }
                     );
                   }
