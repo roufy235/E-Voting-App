@@ -1,16 +1,35 @@
+import 'package:e_voting_app/resource/firestore_methods.dart';
 import 'package:e_voting_app/screens/reg/reg_screen.dart';
 import 'package:e_voting_app/screens/welcome/welcome_screen.dart';
 import 'package:e_voting_app/widgets/btn_elevated.dart';
 import 'package:e_voting_app/widgets/input_style.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 
-class InitRegScreen extends StatelessWidget {
+class InitRegScreen extends StatefulWidget {
   const InitRegScreen({Key? key}) : super(key: key);
 
   static const String routeName = 'initReg';
+
+  @override
+  State<InitRegScreen> createState() => _InitRegScreenState();
+}
+
+class _InitRegScreenState extends State<InitRegScreen> {
+
+  final _isLoadingProvider = StateProvider<int>((ref) => 0);
+  final _errorTextProvider = StateProvider<String>((ref) => '');
+
+  final TextEditingController _matricNoController = TextEditingController();
+
+  @override
+  void dispose() {
+    super.dispose();
+    _matricNoController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,22 +54,69 @@ class InitRegScreen extends StatelessWidget {
               SizedBox(height: 30.h),
               const Text('A 4-digit verification code will be sent to the email attached to this matric number.'),
               SizedBox(height: 20.h),
-              const InputStyle(
-                child: TextField(
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                      labelText: 'Enter your Matric No',
-                      border: InputBorder.none,
-                      prefixIcon: Icon(Icons.verified)
-                  ),
-                ),
+              Consumer(
+                builder: (context, ref, child) {
+                  String errorStr = ref.watch(_errorTextProvider);
+                  return InputStyle(
+                    child: TextField(
+                      onChanged: (value) {
+                        if (value.isNotEmpty && errorStr.isNotEmpty) {
+                          ref.read(_errorTextProvider.notifier).state = '';
+                        }
+                      },
+                      controller: _matricNoController,
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(
+                          labelText: 'Enter your Matric No',
+                          border: InputBorder.none,
+                          prefixIcon: const Icon(Icons.verified),
+                          errorText: errorStr.isEmpty ? null : errorStr
+                      ),
+                    ),
+                  );
+                }
               ),
               SizedBox(height: 20.h),
-              BtnElevated(
-                  child: const Text('Continue'),
-                  onPressed: () {
-                    context.go('/${WelcomeScreen.routeName}/$routeName/${RegScreen.routeName}');
-                  }
+              Consumer(
+                builder: (context, ref, child) {
+                  int isLoading = ref.watch(_isLoadingProvider);
+                  return BtnElevated(
+                      isLoading: isLoading == 1 ? true : false,
+                      child: const Text('Continue'),
+                      onPressed: () async {
+                        if (_matricNoController.text.isNotEmpty) {
+                          String matricNo = _matricNoController.text;
+                          ref.read(_isLoadingProvider.notifier).state = 1;
+                          bool responseBool = await FirestoreMethods().matricNoVerification(matricNo);
+                          ref.read(_isLoadingProvider.notifier).state = 0;
+                          if (responseBool) {
+                            if(!mounted) return;
+                            context.go('/${WelcomeScreen.routeName}/${InitRegScreen.routeName}/${RegScreen.routeName}');
+                          } else {
+                            showDialog(
+                                context: context,
+                                builder: (BuildContext ctx) {
+                                  return AlertDialog(
+                                    title: const Text("Verification"),
+                                    content: const Text('Matric no verification failed!'),
+                                    actions: [
+                                      TextButton(
+                                        child: const Text("OK"),
+                                        onPressed: () {
+                                          Navigator.of(ctx).pop();
+                                        },
+                                      )
+                                    ],
+                                  );
+                                }
+                            );
+                          }
+                        } else {
+                          ref.read(_errorTextProvider.notifier).state = 'Please enter your matric no';
+                        }
+                      }
+                  );
+                }
               )
             ],
           ),
