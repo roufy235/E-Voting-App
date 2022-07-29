@@ -31,11 +31,13 @@ class _InitRegScreenState extends State<InitRegScreen> {
 
   @override
   Widget build(BuildContext context) {
+    Color? appBarColor = Theme.of(context).brightness == Brightness.light ? null : Theme.of(context).colorScheme.surfaceVariant;
     ScreenUtil.init(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Matric No Verification'),
         centerTitle: true,
+        backgroundColor: appBarColor,
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(

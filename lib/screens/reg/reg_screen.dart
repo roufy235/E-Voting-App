@@ -37,11 +37,14 @@ class _RegScreenState extends State<RegScreen> {
 
   @override
   Widget build(BuildContext context) {
+    double textFieldBtwHeight = 23;
+    Color? appBarColor = Theme.of(context).brightness == Brightness.light ? null : Theme.of(context).colorScheme.surfaceVariant;
     ScreenUtil.init(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text('eVoting Registration'),
         centerTitle: true,
+        backgroundColor: appBarColor,
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(
@@ -52,8 +55,10 @@ class _RegScreenState extends State<RegScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(height: 30.h),
-              const Text('Enter the 4-digit code you received.'),
-              SizedBox(height: 20.h),
+              const Text('Enter the 4-digit code you received.',
+                  style: TextStyle(fontWeight: FontWeight.bold)
+              ),
+              SizedBox(height: textFieldBtwHeight.h),
               const InputStyle(
                 child: TextField(
                   keyboardType: TextInputType.number,
@@ -64,7 +69,7 @@ class _RegScreenState extends State<RegScreen> {
                   ),
                 ),
               ),
-              SizedBox(height: 20.h),
+              SizedBox(height: textFieldBtwHeight.h),
               InputStyle(
                 child: TextField(
                   controller: _nameController,
@@ -76,7 +81,7 @@ class _RegScreenState extends State<RegScreen> {
                   ),
                 ),
               ),
-              SizedBox(height: 20.h),
+              SizedBox(height: textFieldBtwHeight.h),
               InputStyle(
                 child: TextField(
                   controller: _emailController,
@@ -88,7 +93,7 @@ class _RegScreenState extends State<RegScreen> {
                   ),
                 ),
               ),
-              SizedBox(height: 20.h),
+              SizedBox(height: textFieldBtwHeight.h),
               InputStyle(
                 child: TextField(
                   controller: _passwordController,
@@ -101,7 +106,7 @@ class _RegScreenState extends State<RegScreen> {
                   ),
                 ),
               ),
-              SizedBox(height: 20.h),
+              SizedBox(height: textFieldBtwHeight.h),
               InputStyle(
                 child: TextField(
                   controller: _confirmPasswordController,
@@ -114,7 +119,7 @@ class _RegScreenState extends State<RegScreen> {
                   ),
                 ),
               ),
-              SizedBox(height: 30.h),
+              SizedBox(height: 35.h),
               Consumer(
                 builder: (context, ref, child) {
                   int isLoading = ref.watch(_isLoadingProvider);

@@ -19,14 +19,13 @@ class BtnElevated extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Color primaryColor = Theme.of(context).colorScheme.primary;
     return SizedBox(
       height: btnHeight.h,
       width: btnWidth.w,
       child: ElevatedButton(
           onPressed: isLoading ? null : onPressed,
-          child: isLoading ? LoadingAnimation(
-            color: Theme.of(context).colorScheme.primary,
-          ) : child
+          child: isLoading ? LoadingAnimation(color: primaryColor) : child
       ),
     );
   }
