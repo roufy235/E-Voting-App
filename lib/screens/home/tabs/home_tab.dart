@@ -10,6 +10,7 @@ class HomeTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Color bgColor = Theme.of(context).brightness == Brightness.light ? Theme.of(context).colorScheme.primary : Theme.of(context).colorScheme.secondaryContainer;
     ScreenUtil.init(context);
     return Scaffold(
       body: SingleChildScrollView(
@@ -18,7 +19,7 @@ class HomeTab extends StatelessWidget {
             Container(
               height: 180.h,
               decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.secondaryContainer,
+                color: bgColor,
                 borderRadius: BorderRadius.only(
                   bottomLeft: Radius.elliptical(120.r, 40.r),
                   bottomRight: Radius.elliptical(120.r, 40.r),
@@ -68,11 +69,16 @@ class HomeTab extends StatelessWidget {
               ),
             ),
             SizedBox(height: 20.h),
-            BtnElevated(
-                child: Text('logout'),
-                onPressed: () async {
-                  AuthMethods().logout();
-                }
+            Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: 24.w
+              ),
+              child: BtnElevated(
+                  child: const Text('logout'),
+                  onPressed: () async {
+                    AuthMethods().logout();
+                  }
+              ),
             )
 
           ],
