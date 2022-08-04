@@ -24,6 +24,13 @@ class BtnElevated extends StatelessWidget {
       height: btnHeight.h,
       width: btnWidth.w,
       child: ElevatedButton(
+          style: ButtonStyle(
+              shape: MaterialStateProperty.all(
+                  RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(defaultBtnBorderRadius.r)
+                  )
+              )
+          ),
           onPressed: isLoading ? null : onPressed,
           child: isLoading ? LoadingAnimation(color: primaryColor) : child
       ),

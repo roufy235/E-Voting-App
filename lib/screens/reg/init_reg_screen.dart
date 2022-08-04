@@ -76,7 +76,7 @@ class _InitRegScreenState extends State<InitRegScreen> {
                   );
                 }
               ),
-              SizedBox(height: 20.h),
+              SizedBox(height: 25.h),
               Consumer(
                 builder: (context, ref, child) {
                   int isLoading = ref.watch(_isLoadingProvider);

@@ -2,6 +2,7 @@ import 'package:dynamic_color/dynamic_color.dart';
 import 'package:e_voting_app/firebase_options.dart';
 import 'package:e_voting_app/router/app_router.dart';
 import 'package:e_voting_app/utils/colors.dart';
+import 'package:e_voting_app/utils/dimens.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';

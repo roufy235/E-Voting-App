@@ -20,6 +20,13 @@ class BtnOutlined extends StatelessWidget {
       height: btnHeight.h,
       width: btnWidth.w,
       child: OutlinedButton(
+          style: ButtonStyle(
+              shape: MaterialStateProperty.all(
+                  RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(defaultBtnBorderRadius.r)
+                  )
+              )
+          ),
           onPressed: onPressed,
           child: child
       ),

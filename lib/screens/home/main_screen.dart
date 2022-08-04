@@ -1,6 +1,8 @@
 import 'package:e_voting_app/screens/home/tabs/home_tab.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 final StateProvider bottomNavigationCurrentIndexProvider = StateProvider<int>((ref) => 0);
 
@@ -23,6 +25,7 @@ class _MainScreenState extends ConsumerState<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(context);
     ref.listen<dynamic>(bottomNavigationCurrentIndexProvider, (previous, next) {
       _pageController.jumpToPage(next);
     });
@@ -59,26 +62,26 @@ class _MainScreenState extends ConsumerState<MainScreen> {
           onDestinationSelected: (int index) {
             ref.read(bottomNavigationCurrentIndexProvider.state).state = index;
           },
-          destinations: const [
+          destinations: [
             NavigationDestination(
                 label: 'Home',
-                icon: Icon(Icons.home),
-                selectedIcon: Icon(Icons.home_outlined),
+                icon: FaIcon(FontAwesomeIcons.house, size: 15.h),
+                selectedIcon: FaIcon(FontAwesomeIcons.house, size: 15.h),
             ),
             NavigationDestination(
                 label: 'Vote',
-                icon: Icon(Icons.how_to_vote),
-                selectedIcon: Icon(Icons.how_to_vote_outlined),
+                icon: FaIcon(FontAwesomeIcons.checkToSlot, size: 15.h),
+                selectedIcon: FaIcon(FontAwesomeIcons.checkToSlot, size: 15.h),
             ),
             NavigationDestination(
                 label: 'Stats',
-                icon: Icon(Icons.auto_graph),
-                selectedIcon: Icon(Icons.auto_graph_outlined),
+                icon: FaIcon(FontAwesomeIcons.chartLine, size: 15.h),
+                selectedIcon: FaIcon(FontAwesomeIcons.chartLine, size: 15.h),
             ),
             NavigationDestination(
-                label: 'Settings',
-                icon: Icon(Icons.settings),
-                selectedIcon: Icon(Icons.settings_outlined),
+                label: 'Profile',
+                icon: FaIcon(FontAwesomeIcons.solidUser, size: 15.h),
+                selectedIcon: FaIcon(FontAwesomeIcons.solidUser, size: 15.h),
             )
           ],
         ),

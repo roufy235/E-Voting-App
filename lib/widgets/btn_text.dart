@@ -20,6 +20,13 @@ class BtnText extends StatelessWidget {
       height: btnHeight.h,
       width: btnWidth.w,
       child: TextButton(
+          style: ButtonStyle(
+              shape: MaterialStateProperty.all(
+                  RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(defaultBtnBorderRadius.r)
+                  )
+              )
+          ),
           onPressed: onPressed,
           child: child
       ),
