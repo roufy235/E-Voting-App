@@ -37,7 +37,7 @@ class AppTextField extends StatelessWidget {
             vertical: 13.h
         ),
         border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(30.r)
+            borderRadius: BorderRadius.circular(10.r)
         ),
         labelText: labelText,
         errorText: errorText,

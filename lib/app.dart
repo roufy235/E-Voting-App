@@ -21,8 +21,8 @@ class MyEvotingApp extends StatelessWidget {
       routeInformationProvider: _goRouter.routeInformationProvider,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        scaffoldBackgroundColor: kColorWhite,
-        dialogBackgroundColor: kColorWhite,
+        scaffoldBackgroundColor: lightColorScheme.surface,
+        dialogBackgroundColor: lightColorScheme.surface,
         useMaterial3: true,
         colorScheme: lightColorScheme,
         floatingActionButtonTheme: const FloatingActionButtonThemeData(
@@ -55,8 +55,8 @@ class MyEvotingApp extends StatelessWidget {
               side: BorderSide(width: 1.0, color: lightColorScheme.primary, style: BorderStyle.solid,),
             )
         ),
-        appBarTheme: const AppBarTheme(
-          backgroundColor: kColorWhite,
+        appBarTheme: AppBarTheme(
+          backgroundColor: lightColorScheme.surface,
           //foregroundColor: colorWhite,
           elevation: 0,
         ),

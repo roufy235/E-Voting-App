@@ -1,3 +1,4 @@
 enum AppScreens {
   onBoarding,
+  signUp,
 }

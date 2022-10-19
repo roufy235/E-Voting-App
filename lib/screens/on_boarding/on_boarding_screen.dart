@@ -7,9 +7,6 @@ class OnBoardingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('newWorld'),
-      ),
       body: Center(
         child: Text('Hello World!',
           style: TextStyle(

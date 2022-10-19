@@ -12,7 +12,7 @@ class BtnOutlined extends StatelessWidget {
   const BtnOutlined({
     Key? key,
     required this.child,
-    this.btnRadius = 25.0,
+    this.btnRadius = 10.0,
     this.btnHeight = 38.0,
     this.bgColor,
     this.useFlexibleWith = false,

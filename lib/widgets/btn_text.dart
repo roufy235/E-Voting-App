@@ -13,7 +13,7 @@ class BtnText extends StatelessWidget {
     required this.child,
     this.btnHeight = 38.0,
     this.useFlexibleWith = false,
-    this.btnRadius = 25.0,
+    this.btnRadius = 10.0,
     this.btnWidth = double.infinity,
     this.isLoading = false,
     required this.onPressed
